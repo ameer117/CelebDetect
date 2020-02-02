@@ -1,0 +1,136 @@
+<html lang="en">
+
+
+	
+   <head>
+        
+<h1 style=""><span class="decorated sample-3">CelebDetect</span></p>
+      
+      <h6 style=""><span class="decorated sample-3">{{header}}</span></p>
+      
+
+  <meta charset="UTF-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel='stylesheet' href='https://codepen.io/P1N2O/pen/xxbjYqx.css'><link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
+
+
+    </head>
+
+   <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
+
+   <body>
+      <p> <center> Find your favorite celebrity by utilizing the power of machine learning<center> <p>
+    <center>
+      <input type=file name=file id="upload-video">
+      <button onclick="upload()">Upload</button>
+      <span id="progress"></span>
+  </center>
+  <center>
+    <div id="video-wrapper"></div>
+</center>
+<center>
+	<div id="buttons">
+    </div>
+
+</center>
+  <script src="//cdn.jsdelivr.net/npm/leancloud-storage@4.2.0/dist/av-min.js"></script>
+    <script>
+    function myFunction() 
+    {
+      document.createTextNode("RECORDING")
+      document.body.style.background = "red";
+    }
+    AV.init({
+      appId:'gwS0bkS4cfYk4EBVzJlieYyN-MdYXbMMI',
+      appKey:'Q8vJYdzORqfz4BBVMl3uFQUY'
+    })
+    
+
+    function upload() {
+    const upload_video = document.getElementById("upload-video")
+    if (upload_video.files.length) {
+  var localFile = upload_video.files[0];
+  var file = new AV.File('video.mp4', localFile);
+  file.save({
+    onprogress: progress=>{
+      document.getElementById('progress').innerText = `${progress.percent.toFixed(2)}%`
+    }
+  }).then(function (file) {
+  console.log('File uploaded. objectId: ' + file.id);
+  /*document.getElementById('video-wrapper').innerHTML = `
+<video id = "celebVid" controls>
+  <source src= "${file.url()}" type="video/mp4" crossorigin = "use-credentials">
+ </video>
+
+  `;*/
+  document.getElementById('buttons').innerHTML = `
+  <br><br><p>Say a celebrity to search for!</p><button id = "record-button" onclick=redir()>Record Voice Input</button>`//"window.location.href = 'http://127.0.0.1:5000/mic';"
+
+  fetch('/getValues?url='+file.url()).then(function(response){
+    return response.json();
+  }).then(function(json){
+    console.log(json);
+    
+  })
+}, function (error) {
+  // The file either could not be read or could not be saved to LeanCloud
+});
+  }
+}
+    </script>
+    <p id = "header2"><h4 style=""><span class="decorated sample-3"></span></p>
+    <script>
+    	function redir(){
+    		console.log("we are here")
+    		//var p2 = "<p>loading...</p>";
+    		document.getElementById("header2").innerHTML = "loading..."
+    		location.href = "http://127.0.0.1:5000/mic";
+    	}
+    </script>
+
+    
+
+
+<html>
+  <center>
+    <head>
+        
+<link rel='stylesheet' href='https://codepen.io/P1N2O/pen/xxbjYqx.css'><link rel="stylesheet" href="./style.css">
+
+
+<!--     </head>
+    <div class="bar">
+      <input class="searchbar" type="text" title="Search">
+      <a href="#"> <img class="voice" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Google_mic.svg/716px-Google_mic.svg.png" title="Search by Voice"></a>
+    </div>
+    <div class="buttons">
+      <button class="button" type="button">Find Celebrity</button> -->
+      
+     </div>
+     <style>
+     	h1 {
+     		font-size: 60px;
+     		color: white;
+     		font-weight: bolder;
+     	}
+     	button {
+  			background-color: white;
+ 			 color: black;
+ 			 border: 2px solid #008CBA; /* Green */
+			}
+		input {
+  			background-color: white;
+ 			 color: black;
+ 			 border: 2px solid #008CBA; /* Green */
+			}
+		p{
+			font-size: 20px;
+			color: black;
+
+		}
+     </style>
+  </body>
+  </body>
+
+</html>

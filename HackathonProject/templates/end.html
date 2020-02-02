@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <center>
+    <head>
+        
+<h1 style=""><span class="decorated sample-3">CelebDetect</span></p>
+      
+      <h6 style=""><span class="decorated sample-3">{{header}}</span></p>
+      
+
+  <meta charset="UTF-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel='stylesheet' href='https://codepen.io/P1N2O/pen/xxbjYqx.css'><link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
+
+
+    </head>
+    <div class="video">
+    <video width="600" height="300" controls id="celebVid">
+  <source src="https://ameersbucket.s3-us-west-1.amazonaws.com/video" type="video/mp4" >
+</video>
+      
+      <p id = "header2"><h4 style=""><span class="decorated sample-3"></span></p>
+    </div>
+    
+      
+    
+    <div class="buttons">
+      <button class="button" onClick = "moveBackward({{array}})" type="button">Previous</button>
+       <button class="button" type="button" button id = "next-button" onClick = "moveForward({{array}})">Next</button>
+      
+      <button class="button" onclick="window.location.href = 'http://127.0.0.1:5000/';" type="button">Find new celebrity</button>
+    </div>
+
+    <script>
+      var count = -1;
+      var video = document.getElementById("celebVid");
+      function moveForward(array){
+        //var video = document.getElementById("celebVid");
+        console.log(count);
+        console.log(array.length);
+        count++;
+        if (count == array.length){
+          console.log("set count to 0");
+          count = 0;
+        }
+        video.currentTime = array[count];
+        //video.currentTime = 5.52;
+        
+        
+        var s = "instance " + String(count+1) + " of " + String(array.length);
+        updateHeader(s);
+      }
+      function moveBackward(array){
+        console.log(count);
+        
+        count--;
+        if (count <= -1){
+          count = array.length-1;
+        }
+        video.currentTime = array[count];
+        var s = "instance " + String(count+1) + " of " + String(array.length);
+        updateHeader(s);
+        
+      }
+      function updateHeader(s){
+        document.getElementById("header2").innerHTML = s;
+        
+      }
+
+
+    </script>
+
+    <style>
+      h1 {
+        font-size: 60px;
+        color: white;
+        font-weight: bolder;
+      }
+      button {
+        background-color: white;
+       color: black;
+       border: 2px solid #008CBA; /* Green */
+      }
+    input {
+        background-color: white;
+       color: black;
+       border: 2px solid #008CBA; /* Green */
+      }
+    p{
+      font-size: 20px;
+      color: white;
+
+    }
+     </style>
+      
+     
+  </body>
+  

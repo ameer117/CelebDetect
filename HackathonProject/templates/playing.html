@@ -1,0 +1,58 @@
+<html lang="en">
+   <head>
+      <title>HTML Font</title>
+      <meta charset="utf-8">
+   </head>
+
+   <body>
+      <h1> <center> CelebDetect <center> </h1>
+      <!-- <p style = "font-family:georgia,garamond,serif;font-size:30px;font-style:italic;color:indigo">
+         1. Start by uploading a video
+         <br>
+         2. Type in or say a name of a celebrity
+         you want to find in the video
+        <br>
+         3. Jump between instances of the word!
+         <br>
+      </p>
+ -->
+    <!-- <h1> <center> Command F for videos! <center> </h1> -->
+<center>
+    <input type="file" name="file" onchange="selectedVideo(this);"/>
+
+
+
+
+    <button onclick="window.location.href = 'http://127.0.0.1:5000/mic';">Click to start recording!</button>
+
+
+    <button onclick="window.location.href = 'http://127.0.0.1:5000/upload';";>Click to upload video (JS)!</button>
+</center>
+    <h1><center> Upload a video file! </center></h1>
+    <center>
+    <form method=post enctype=multipart/form-data>
+      <input type=file name=file>
+      <input type=submit value=Upload>
+    </form>
+    </center>
+
+
+
+<center>
+<video controls autoplay>
+  <source src= "https://lc-gluttony.s3.amazonaws.com/I7NQzAkCE83Q/80cceec854b226b897ab/thedarkknighttrailer.mp4" type="video/mp4" crossorigin = "use-credentials">
+ </video>
+</center>
+<script src="//cdn.jsdelivr.net/npm/leancloud-storage@4.2.0/dist/av-min.js"></script>
+    <script>
+    function myFunction() 
+    {
+      document.createTextNode("RECORDING")
+      document.body.style.background = "red";
+    }
+    </script>
+
+
+  </body>
+
+</html>
